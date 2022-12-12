@@ -12,16 +12,16 @@ if($_FILES['file_name']['error']==0){
                     'size'=>$_FILES['file_name']['size'],
                     'type'=>$_FILES['file_name']['type'],
                     'file_name'=>$file_name]);
-  $description=$_POST['description'];
-  echo $description;
-  echo "<BR>";
-  echo $file_name;
-  echo "<BR>";
-  echo $_FILES['file_name']['size']." Byte";
-  echo "<BR>";
-  echo $_FILES['file_name']['type'];
-  echo "<BR>";
-  // header('location:../upload.php?upload=success');
+  // $description=$_POST['description'];
+  // echo $description;
+  // echo "<BR>";
+  // echo $file_name;
+  // echo "<BR>";
+  // echo $_FILES['file_name']['size']." Byte";
+  // echo "<BR>";
+  // echo $_FILES['file_name']['type'];
+  // echo "<BR>";
+  header('location:../upload.php?upload=success');
 }else{
   echo "上傳失敗，請檢察檔案是否正確，或網路是否連線或聯絡網站管理員";
 }

@@ -50,10 +50,14 @@ include_once "./api/base.php";
             width:20%;
         }
         .list-item div:nth-child(4){
-            width:15%;
+            width:10%;
         }
         .list-item div:nth-child(5){
-            width:25%;
+            width:20%;
+            overflow: hidden;
+        }
+        .list-item div:nth-child(6){
+            width:10%;
             overflow: hidden;
         }
     </style>
@@ -61,12 +65,12 @@ include_once "./api/base.php";
 <body>
  <h1 class="header">檔案上傳練習</h1>
  <!----建立你的表單及設定編碼----->
+
+<form action="./api/upload.php" method="post" enctype="multipart/form-data" style="text-align:center">
 <?php
 if(isset($_GET['upload']) && $_GET['upload']=='success')
-echo "上傳成功";
+echo "<div style='color:green'>上傳成功</div>";
 ?>
-
- <form action="./api/upload.php" method="post" enctype="multipart/form-data" style="margin:0px 50px;display:inline-block;">
     <ul>
         <li>描述:<input type="text" name="description"></li>
         <li>檔案:<input type="file" name="file_name"style="padding:10px"></li>
@@ -85,6 +89,7 @@ echo "<div>描述</div>";
 echo "<div>檔名</div>";
 echo "<div>大小</div>";
 echo "<div>類型</div>";
+echo "<div>操作</div>";
 echo "</li>";
     foreach($files as $file){
         echo "<li class='list-item'>";
@@ -107,6 +112,11 @@ echo "</li>";
             echo "</div>";
             echo "<div>";
             echo $file['type'];
+            echo "</div>";
+            echo "<div>";
+            echo "<a href='edit_form.php?id={$file['id']}'>編輯</a>";
+            echo "<a href='./api/del.php?id={$file['id']}'>刪除</a>";
+            echo "</div>";
             echo "</div>";
         echo "</li>";
     }
