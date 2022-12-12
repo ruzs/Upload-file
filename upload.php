@@ -34,7 +34,7 @@ include_once "./api/base.php";
             background-color: lightgreen;
         }
         .list-item div:nth-child(1){
-            width:10%;
+            width:20%;
         }
         .list-item div:nth-child(1) img{
             width:150px;
@@ -44,13 +44,17 @@ include_once "./api/base.php";
             width:30%;
         }
         .list-item div:nth-child(2){
-            width:30%;
+            width:20%;
         }
         .list-item div:nth-child(3){
-            width:10%;
+            width:20%;
         }
         .list-item div:nth-child(4){
-            width:20%;
+            width:15%;
+        }
+        .list-item div:nth-child(5){
+            width:25%;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -85,7 +89,12 @@ echo "</li>";
     foreach($files as $file){
         echo "<li class='list-item'>";
             echo "<div>";
-            echo "<img src='./upload/{$file['file_name']}'>";
+            if(is_image($file['type'])){
+                echo "<img src='./upload/{$file['file_name']}'>";
+            }else{
+                $icon=dummy_icon($file['type']);
+                echo "<img src='./material/{$icon}' style='width:80px'>";
+            }
             echo "</div>";
             echo "<div>";
             echo $file['description'];
@@ -94,7 +103,7 @@ echo "</li>";
             echo $file['file_name'];
             echo "</div>";
             echo "<div>";
-            echo $file['size'];
+            echo floor($file['size']/1024) . 'KB';
             echo "</div>";
             echo "<div>";
             echo $file['type'];
