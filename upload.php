@@ -19,7 +19,18 @@
 <body>
  <h1 class="header">檔案上傳練習</h1>
  <!----建立你的表單及設定編碼----->
+<?php
+if(isset($_GET['upload']) && $_GET['upload']=='success')
 
+?>
+
+ <form action="./api/upload.php" method="post" enctype="multipart/form-data" style="margin:0px 50px;display:inline-block;">
+    <ul>
+        <li>描述:<input type="text" name="description"></li>
+        <li>檔案:<input type="file" name="file_name"style="padding:10px"></li>
+        <li><input type="submit" value="上傳"style="padding:10px"></li>
+    </ul>
+</form>
 
 
 
