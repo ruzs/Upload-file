@@ -21,7 +21,7 @@
  <!----建立你的表單及設定編碼----->
 <?php
 if(isset($_GET['upload']) && $_GET['upload']=='success')
-
+echo "上傳成功";
 ?>
 
  <form action="./api/upload.php" method="post" enctype="multipart/form-data" style="margin:0px 50px;display:inline-block;">
@@ -32,11 +32,7 @@ if(isset($_GET['upload']) && $_GET['upload']=='success')
     </ul>
 </form>
 
-
-
-
 <!----建立一個連結來查看上傳後的圖檔---->  
-
 
 </body>
 </html>
