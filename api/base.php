@@ -42,7 +42,7 @@ function all($table,...$args){
         $sql = $sql . $args[1];
     }
 
-    //echo $sql;
+    // echo $sql;
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 }
