@@ -63,9 +63,9 @@ if (!empty($_FILES['doc']['tmp_name'])) {
     unlink('export.csv');
   } else {
     $file = fopen('export.csv', 'w+');
-    $rows = all('students', " limit 5");
+    $rows = all('students', " limit 15");
     fwrite($file, "\xEF\xBB\xBF");
-
+    // \xEF\xBB\xBF microsoft系列檔案開頭必加BOM
     foreach ($rows as $row) {
       $str = join(",", $row);
       fwrite($file, $str);
