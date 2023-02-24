@@ -11,8 +11,8 @@ include_once "./api/base.php";
  */
 
 if (!empty($_FILES['doc']['tmp_name'])) {
-  move_uploaded_file($_FILES['doc']['tmp_name'], './upload/' . $_FILES['doc']['name']);
-  $file = './upload/' . $_FILES['doc']['name'];
+  //move_uploaded_file($_FILES['doc']['tmp_name'], './upload/'.$_FILES['doc']['name']);
+  $file=$_FILES['doc']['tmp_name'];
 
   $resource = fopen($file, 'r');
   $line = fgets($resource);

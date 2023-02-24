@@ -54,7 +54,19 @@ if(!empty($_FILES['img']['tmp_name'])){
   ?>
   <img src="dst.jpg" alt="">
   <!----圖形加邊框----->
-
+  <?php
+  $w=$imageinfo[0]+20;
+  $h=$imageinfo[1]+20;
+  $dst=imagecreatetruecolor($w,$h);
+  $color=imagecolorallocate($dst,255,155,55);
+  imagefill($dst,0,0,$color);
+  /* echo "<pre>";
+  print_r($imageinfo);
+  echo "</pre>"; */
+  imagecopyresampled($dst,$image,10,10,0,0,$imageinfo[0],$imageinfo[1],$imageinfo[0],$imageinfo[1]);
+  imagejpeg($dst,'border.jpg');
+  ?>
+  <img src="border.jpg" alt="">
 
   <!----產生圖形驗證碼----->
 
