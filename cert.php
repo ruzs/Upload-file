@@ -14,19 +14,44 @@
    * 1.長度大概是4~6個字
    * 2.可能有數,大小寫英文
    */
-  echo cert_to_png(4, 7); //驗證碼的長短
+  echo cert_to_png(6, 9); //驗證碼的長短
+
   function cert_to_png($start, $length)
   {
     $cert = cert_str($start, $length);
-    $png = imagecreatetruecolor(200, 50);
+    $info = imageftbbox(18, 0, './fonts/arial.ttf', $cert);
+    $border = 10;
+    $width = $info[2] + $border * 2;
+    $height = $info[1] - $info[7] + $border * 2;
+    $png = imagecreatetruecolor($width, $height);
     $white = imagecolorallocate($png, 255, 255, 255);
-    $x_start=10;
-    for($i=0;$i<strlen($cert);$i++){
-        $c=mb_substr($cert,$i,1);
-        imagestring($png,5,$x_start,rand(10,30),$c,$white);
-        $gap=rand(5,15);
-        $x_start=$x_start+10+$gap;
+    $black = imagecolorallocate($png, 0, 0, 0);
+    imagefill($png, 0, 0, $white);
+    // echo "<pre>";
+    // print_r($info);
+    // echo "</pre>";
+    $y = $info[1] - $info[7];
+    // echo $y;
+    $x_start = 0;
+    $y_start = 0;
+    $y_top = max($info[1], $info[3], $info[5], $info[7]);
+    $x_left = min($info[0], $info[2], $info[4], $info[6]);
+    imagefttext($png, 18, 0, 0 + $x_start - $x_left + $border, $y + $y_start - $y_top + $border, $black, './fonts/arial.ttf', $cert);
+    for ($i = 0; $i < 5; $i++) {
+      $line_left_x = rand(0, 20);
+      $line_left_y = rand(0, $height);
+      $line_right_x = rand($width - 20, $width);
+      $line_right_y = rand(0, $height);
+      $line_color = imagecolorallocate($png, rand(100, 200), rand(100, 200), rand(100, 200));
+      imageline($png, $line_left_x, $line_left_y, $line_right_x, $line_right_y, $line_color);
     }
+    /*
+    for ($i = 0; $i < strlen($cert); $i++) {
+      $c = mb_substr($cert, $i, 1);
+      imagestring($png, 5, $x_start, rand(10, 30), $c, $white);
+      $gap = rand(5, 15);
+      $x_start = $x_start + 10 + $gap;
+    }*/
     imagepng($png, './cert.png');
     return $cert;
   }
@@ -51,7 +76,6 @@
     return $cert;
   }
   ?>
-  <img src="cert.png" alt="">
+<img src="cert.png" alt="" style="border:2px solid green">
 </body>
-
 </html>
