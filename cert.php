@@ -19,10 +19,14 @@
   function cert_to_png($start, $length)
   {
     $cert = cert_str($start, $length);
-    $info = imageftbbox(18, 0, './fonts/arial.ttf', $cert);
-    $border = 10;
-    $width = $info[2] + $border * 2;
-    $height = $info[1] - $info[7] + $border * 2;
+    $info=imageftbbox(18,15,'./fonts/arial.ttf',$cert);
+    $x_left=min($info[0],$info[2],$info[4],$info[6]);
+    $y_top=min($info[1],$info[3],$info[5],$info[7]);
+    $x_right=max($info[0],$info[2],$info[4],$info[6]);
+    $y_bottom=max($info[1],$info[3],$info[5],$info[7]);
+    $border=0;
+    $width = ($x_right-$x_left) + $border * 2;
+    $height = ($y_bottom-$y_top) + $border * 2;
     $png = imagecreatetruecolor($width, $height);
     $white = imagecolorallocate($png, 255, 255, 255);
     $black = imagecolorallocate($png, 0, 0, 0);
@@ -31,12 +35,9 @@
     // print_r($info);
     // echo "</pre>";
     $y = $info[1] - $info[7];
-    // echo $y;
     $x_start = 0;
     $y_start = 0;
-    $y_top = max($info[1], $info[3], $info[5], $info[7]);
-    $x_left = min($info[0], $info[2], $info[4], $info[6]);
-    imagefttext($png, 18, 0, 0 + $x_start - $x_left + $border, $y + $y_start - $y_top + $border, $black, './fonts/arial.ttf', $cert);
+    imagefttext($png,18,15,0 + $x_start - $x_left +$border,$y_start-$y_top , $black,'./fonts/arial.ttf',$cert);
     for ($i = 0; $i < 5; $i++) {
       $line_left_x = rand(0, 20);
       $line_left_y = rand(0, $height);
