@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>文字圖形處理練習</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <style>
     #uploadForm {
       width: 400px;
@@ -104,7 +105,8 @@
       }
     }
   }
-
+  session_start();
+  $_SESSION['cert']=$gstr;
   //建立一個陣列用來儲存每一個字元的圖形資訊
   $text_info = [];
 
@@ -224,16 +226,37 @@
   }
 
   //輸出圖片為jpg檔
-  imagejpeg($dst_img, "cert.jpg", 100);
-
+  //imagejpeg($dst_img,"cert.jpg",100);
+  ob_start(); //開啟緩衝區
+  imagepng($dst_img);
+  $image_type="data:image/png;base64,";
+  $image_data=ob_get_contents();
+  //echo base64_encode($dst_img);
+ob_end_clean();
+  $base_64=base64_encode($image_data);
+  //echo $base_64;
   //銷毀圖片資源
   imagedestroy($dst_img);
   ?>
   <div style="width:500px;margin:auto;">
     <h2>加入文字後的圖形<?= $length . "碼"; ?>-<?= $lines . "線"; ?>-<?= $gstr; ?></h2>
-    <img src="cert.jpg" alt="" style="border:2px solid black">
+    <img src="<?=$image_type;?><?=$base_64;?>" alt="" style="border:2px solid black">
+    <input type="text" name="cert" id="cert"><button class='submit-btn'>驗證</button>
   </div>
 
 </body>
 
 </html>
+
+<script>
+$(".submit-btn").on("click",function(){
+    $.get("cert_code.php",{cert:$("#cert").val()},(ans)=>{
+        console.log(ans,$("#cert").val())
+        if(parseInt(ans)){
+            alert("驗證成功");
+        }else{
+            alert("失敗");
+        }
+    })
+})
+</script>
