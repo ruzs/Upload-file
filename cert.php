@@ -20,9 +20,15 @@
     $cert = cert_str($start, $length);
     $png = imagecreatetruecolor(200, 50);
     $white = imagecolorallocate($png, 255, 255, 255);
-    imagestring($png, 5, 10, 10, $cert, $white);
+    $x_start=10;
+    for($i=0;$i<strlen($cert);$i++){
+        $c=mb_substr($cert,$i,1);
+        imagestring($png,5,$x_start,rand(10,30),$c,$white);
+        $gap=rand(5,15);
+        $x_start=$x_start+10+$gap;
+    }
     imagepng($png, './cert.png');
-    //    return $cert;
+    return $cert;
   }
   function cert_str($start, $length)
   {
