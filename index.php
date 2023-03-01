@@ -22,7 +22,7 @@
   <a href="image.php">
     <div class="types">圖形處理</div>
   </a>
-  <a href="cert.php">
+  <a href="cert.html">
     <div class="types">圖形驗證</div>
   </a>
 </body>

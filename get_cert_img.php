@@ -1,73 +1,3 @@
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>文字圖形處理練習</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <style>
-    #uploadForm {
-      width: 400px;
-      margin: 1rem auto;
-      font-size: 1.25rem;
-      padding: 1rem;
-    }
-
-    #list {
-      border-collapse: collapse;
-      box-shadow: 0 0 10px #ccc;
-      margin: 1rem auto;
-    }
-
-    #list img {
-      width: 150px;
-    }
-
-    #list td,
-    #list th {
-      border: 1px solid #ccc;
-      padding: 0.5rem 1.1rem;
-      font-size: 1.15rem;
-    }
-
-    #list tr:hover {
-      background: lightgreen;
-      transform: scale(1.1);
-    }
-
-    .reload {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.5rem 1.5rem;
-      font-size: 1.2rem;
-    }
-  </style>
-</head>
-
-<body>
-  <h1 class="header">文字圖形處理練習</h1>
-  <!---建立檔案上傳機制--->
-
-  <!-- <form id="uploadForm" action="?" method="post" enctype="multipart/form-data">
-    <div>
-        長度: <input type="number" name="length" value="4">
-    </div>
-    <div>
-        <input type="number" step="1" name="size" value="24">
-    </div>   
-    <div>
-        <select name="color" >
-            <option value="blue">藍色</option>
-            <option value="red">紅色</option>
-            <option value="green">綠色</option>
-        </select>
-    </div>   
-    <input type="submit" value="產生驗證碼">
-</form> -->
-  <!--使用按鈕每次點擊時重整頁面來重新產生圖形驗證碼-->
-  <button onclick="location.reload()" class='reload'>產生驗證碼</button>
   <?php
 
   //使用亂數來產生驗證碼長度
@@ -234,29 +164,7 @@
   //echo base64_encode($dst_img);
 ob_end_clean();
   $base_64=base64_encode($image_data);
-  //echo $base_64;
+  echo $image_type . $base_64;
   //銷毀圖片資源
   imagedestroy($dst_img);
   ?>
-  <div style="width:500px;margin:auto;">
-    <h2>加入文字後的圖形<?= $length . "碼"; ?>-<?= $lines . "線"; ?>-<?= $gstr; ?></h2>
-    <img src="<?=$image_type;?><?=$base_64;?>" alt="" style="border:2px solid black">
-    <input type="text" name="cert" id="cert"><button class='submit-btn'>驗證</button>
-  </div>
-
-</body>
-
-</html>
-
-<script>
-$(".submit-btn").on("click",function(){
-    $.get("cert_code.php",{cert:$("#cert").val()},(ans)=>{
-        console.log(ans,$("#cert").val())
-        if(parseInt(ans)){
-            alert("驗證成功");
-        }else{
-            alert("失敗");
-        }
-    })
-})
-</script>
