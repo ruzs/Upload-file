@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2023-02-21 09:41:56
+-- 產生時間： 2023-03-07 09:06:30
 -- 伺服器版本： 10.4.24-MariaDB
 -- PHP 版本： 8.1.6
 
@@ -94,7 +94,8 @@ INSERT INTO `upload` (`id`, `file_name`, `size`, `type`, `upload_time`, `update_
 (56, '20230221031711.jpg', 14922, 'image/jpeg', '2023-02-21 07:17:11', '2023-02-21 07:17:11', 'Qoo'),
 (57, '20230221031726.png', 1103871, 'image/png', '2023-02-21 07:17:26', '2023-02-21 07:17:26', 'Qong_p'),
 (58, '20230221031738.png', 857656, 'image/png', '2023-02-21 07:17:38', '2023-02-21 07:17:38', 'Qong_p2'),
-(59, '20230221031752.jpg', 179424, 'image/jpeg', '2023-02-21 07:17:52', '2023-02-21 07:17:52', 'colorful');
+(59, '20230221031752.jpg', 179424, 'image/jpeg', '2023-02-21 07:17:52', '2023-02-21 07:17:52', 'colorful'),
+(60, '20201225004037.jpg', 23389, 'image/jpeg', '2023-03-07 05:33:36', '2023-03-07 05:33:59', '加油');
 
 --
 -- 已傾印資料表的索引
@@ -126,7 +127,7 @@ ALTER TABLE `students`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
