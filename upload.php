@@ -15,6 +15,7 @@ include_once "./api/base.php";
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>檔案上傳</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
     <style>
         .list{
             list-style-type:none;
@@ -73,11 +74,22 @@ echo "<div style='color:green'>上傳成功</div>";
 ?>
     <ul>
         <li>描述:<input type="text" name="description"></li>
-        <li>檔案:<input type="file" name="file_name"style="padding:10px"></li>
+        <li>檔案:<input type="file" name="file_name" id="upload"style="padding:10px" ></li>
         <li><input type="submit" value="上傳"style="padding:10px"></li>
+        <img src=""id="preview" alt="">
     </ul>
 </form>
+<script>
+    let e=10;
+    $("input[type='file']").on("change",function (e) {
+        console.log(e);
+        let file=e.target.files[0]
+        let src=URL.createObjectURL(file);
+        console.log(src)
 
+        $("#preview").attr('src',src)
+    })
+</script>
 <!----建立一個連結來查看上傳後的圖檔---->  
 <?php
 $files=all('upload');
